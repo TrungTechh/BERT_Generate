@@ -4,7 +4,6 @@ import numpy as np
 import torch
 from pytorch_transformers import BertTokenizer, BertForMaskedLM
 import nltk
-nltk.download('punkt')
 
 app = Flask(__name__)
 CORS(app)
