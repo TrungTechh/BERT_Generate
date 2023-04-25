@@ -1,9 +1,10 @@
 from flask import Flask, request
 from flask_cors import CORS
-import torch
 import numpy as np
+import torch
 from pytorch_transformers import BertTokenizer, BertForMaskedLM
 import nltk
+nltk.download('punkt')
 
 app = Flask(__name__)
 CORS(app)
@@ -38,9 +39,9 @@ def predict():
 	segments_tensors = torch.tensor([segments_ids])
 
 	with torch.no_grad():
-	    outputs = model(tokens_tensor, token_type_ids=segments_tensors)
-	    predictions = outputs[0]
-	    attention = outputs[-1]
+	    outputs = model(tokens_tensor, token_type_ids=segments_tensors) 
+	    predictions = outputs[0] 
+	    attention = outputs[-1] 
 
 	dim = attention[2][0].shape[-1]*attention[2][0].shape[-1]
 	a = attention[2][0].reshape(12, dim)
@@ -62,4 +63,4 @@ def predict():
 	return sentence_orig.replace('____', '<font color="red"><b><i>'+predicted_token+'</i></b></font>')
 
 if __name__=='__main__':
-	app.run(debug=False)
+	app.run(debug=True)
