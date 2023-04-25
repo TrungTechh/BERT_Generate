@@ -63,4 +63,4 @@ def predict():
 	return sentence_orig.replace('____', '<font color="red"><b><i>'+predicted_token+'</i></b></font>')
 
 if __name__=='__main__':
-	app.run(debug=True)
+	app.run(debug=False)
