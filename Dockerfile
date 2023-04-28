@@ -4,8 +4,8 @@ WORKDIR /code
 
 COPY ./requirements.txt /code/requirements.txt
 
+COPY ./app.py /code/app.py
+
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
-COPY . .
-
-CMD ["gunicorn ", "app.main:app"]
+CMD ["gunicorn ","-w" ,"4", "app:app"]
